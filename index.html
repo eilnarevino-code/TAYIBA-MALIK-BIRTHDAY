@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday MRS TAYIBA MALIK 💖</title>
+    <style>
+        body {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #4a4a4a;
+        }
+        .container {
+            background: rgba(255, 255, 255, 0.96);
+            padding: 35px 25px;
+            border-radius: 25px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            max-width: 600px;
+            width: 100%;
+            text-align: center;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.6);
+        }
+        #lock-screen {
+            display: block;
+        }
+        #main-content {
+            display: none;
+        }
+        .pin-input {
+            font-size: 1.5rem;
+            padding: 10px;
+            width: 180px;
+            text-align: center;
+            border: 2px solid #ff477e;
+            border-radius: 12px;
+            margin: 15px 0;
+            outline: none;
+            letter-spacing: 5px;
+        }
+        .btn {
+            background: #ff477e;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            font-size: 1rem;
+            border-radius: 15px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+        }
+        .btn:hover {
+            background: #d81159;
+        }
+        .error-msg {
+            color: #d81159;
+            font-size: 0.9rem;
+            margin-top: 10px;
+            display: none;
+        }
+        .heart {
+            font-size: 3.2rem;
+            animation: pulse 1.2s infinite alternate;
+            margin-bottom: 5px;
+        }
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.15); }
+        }
+        h1 {
+            color: #d81159;
+            font-size: 1.8rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+        }
+        .date-badge {
+            background: #ff3366;
+            color: white;
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+            font-weight: bold;
+        }
+        /* Photo Gallery Styling */
+        .photo-gallery {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .photo-gallery img {
+            width: 120px;
+            height: 120px;
+            object-fit: cover;
+            border-radius: 15px;
+            border: 3px solid #ff477e;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        /* Inline Memory Photo Styling */
+        .inline-memory {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .inline-memory img {
+            max-width: 100%;
+            height: auto;
+            max-height: 280px;
+            border-radius: 15px;
+            border: 3px solid #b5179e;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+        }
+        .memory-caption {
+            font-size: 0.9rem;
+            color: #b5179e;
+            font-style: italic;
+            margin-top: 5px;
+            font-weight: bold;
+        }
+        .message-scroll {
+            text-align: left;
+            background: #fff0f3;
+            padding: 22px;
+            border-radius: 15px;
+            margin-top: 10px;
+            border-left: 5px solid #ff3366;
+            max-height: 420px;
+            overflow-y: auto;
+        }
+        p {
+            font-size: 1rem;
+            line-height: 1.7;
+            color: #444;
+            margin-bottom: 15px;
+        }
+        .shayari {
+            font-style: italic;
+            color: #b5179e;
+            font-weight: 500;
+            text-align: center;
+            margin: 15px 0;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .highlight {
+            font-weight: bold;
+            color: #d81159;
+            text-align: center;
+            display: block;
+            font-size: 1.1rem;
+            margin: 15px 0;
+        }
+        .signature {
+            text-align: center;
+            font-weight: bold;
+            color: #ff3366;
+            font-size: 1.2rem;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- LOCK SCREEN -->
+        <div id="lock-screen">
+            <div style="font-size: 3rem;">🔐</div>
+            <h2>A Special Surprise For You</h2>
+            <p style="color: #666; font-size: 0.95rem;">Enter your special birthday PIN (PIN: 3076)</p>
+            <input type="password" id="pinCode" class="pin-input" maxlength="4" placeholder="••••">
+            <br>
+            <button class="btn" onclick="checkPin()">Open Surprise</button>
+            <div id="errorMsg" class="error-msg">Incorrect PIN! Try 3076 🥺</div>
+        </div>
+
+        <!-- MAIN BIRTHDAY CONTENT -->
+        <div id="main-content">
+            <div class="heart">✨👑</div>
+            <h1>MRS TAYIBA MALIK 💋🤭</h1>
+            <div class="date-badge">🎂 Special Day: 29th October 💖</div>
+
+            <!-- TOP PHOTOS SECTION -->
+            <div class="photo-gallery">
+                <img src="photo1.jpg" alt="Tayiba Malik">
+                <img src="photo2.jpg" alt="Memories">
+            </div>
+
+            <div class="message-scroll">
+                <p><strong>Happy Birthday to the girl who holds my heart, my safe place, my peace, and my entire world 💍✨🎂</strong></p>
+
+                <p>Meri jaan jab main piche mur kar dekhta hoon ke humne kitna waqt aik sath guzara hai aur aaj hum kis haseen jagah par hain toh mera dil sirf shukar se bhar jata hai. Tum sirf meri partner nahi ho, tum meri woh taaqat ho jo mujhe har mushkil waqt mein sambhal leti ho. Mera har din tumse shuru hota hai aur tum par hi khatam hota hai.</p>
+
+                <p>Main janta hoon ke kabhi kabhi meri overthinking aur insecurities ki wajah se tumhe thori pareshani hoti hai, lekin tumne phir bhi kabhi mera haath nahi chora. Tumne har kadam par mujhe samjha hai, mujhe reassure kiya hai aur yeh prove kiya hai ke tum sirf aur sirf meri ho. Subah uthte hi apne din ki pehli khushi mere sath share karna, meri baatein sunna aur har haal mein mera sath dena—yeh sab mere liye dunya ki sabse keemti cheez hai.</p>
+
+                <!-- INLINE VIDEO CALL SLEEPING PHOTO -->
+                <div class="inline-memory">
+                    <img src="photo3.jpg" alt="Sleeping on Video Call">
+                    <div class="memory-caption">Jab tum video call par so gayi thi... sabse pyaari memory 🥺💤💕</div>
+                </div>
+
+                <p>You are my whole universe, my life, my precious dudu, and my absolute jaan 💖✨ Tum sirf meri mohabbat nahi balkay Malik ki jaan ho 💓💞 We share this beautiful dream of marrying each other and becoming a pilot, and I want you to know that I will never, ever leave you. ✈️💍</p>
+
+                <div class="shayari">
+                    تم سے محبت ka کوئی حساب تھوڑی ہے 🧸<br>
+                    تم سے دل لگایا ہے کوئی خواب تھوڑی ہے 🩹✨
+                </div>
+
+                <p>I know my temper can sometimes be sharp and it might hurt you unintentionally, but please believe me when I say I love you beyond words. You are the one who rules my heart, my little bacha 💋😚</p>
+                
+                <span class="highlight">👑 MRS TAYIBA MALIK 👑 🥹🫂</span>
+
+                <div class="shayari">
+                    تم جو اتنے قریب ہو کوئی مذاق تھوڑی ہے 🔐💍<br>
+                    تم سے ملنا صرف اتفاق تھوڑی ہے 🦋✨
+                </div>
+
+                <p>I want to build my entire future with you 🤭♾️ Har lamha tumhare sath bitana chahta hoon kyun ke tum Malik ki wifey ho 🌸 Tum hi wo wahid shakhs ho jis se mujhe be-panah mohabbat hai.</p>
+
+                <p>Dua hai ke Allah tallah tumhari zindagi ki har ek khwahish ko poora kare. Tumhari yeh pyari si muskaan kabhi tumhare chehre se na hatay aur tumhari zindagi mein kabhi koi dukh na aaye. Main hamesha tumhare sath hoon tumhara har darr door karne ke liye aur tumhein dunya ki har khushi dene ke liye. Tum hi Malik ke bachon ki maa bano gi! 💍</p>
+
+                <span class="highlight">💍 MRS TAYIBA MALIK 💍 💗♥️</span>
+
+                <div class="shayari">
+                    اور ہاں تم صرف میری aaj ki محبت نہیں ❤️😍<br>
+                    بلکہ میری आने والی پوری zindagi ka حاصل ho 💘
+                </div>
+
+                <p>Tum meri zindagi ka woh haseen tohfa ho jo mujhe rab ne diya hai. Aaj ke is special din par main bas yeh kehna chahta hoon ke tum mere liye kya ho—tum meri subah ka sukoon aur meri rooh ka sakoon ho. Hamesha aise hi muskuraati raho, khush raho aur meri zindagi ko yunhi roshan rakho. I love you so so much meri jaan, Happy Birthday to my forever! 🌍❤️🧿</p>
+            </div>
+
+            <div class="signature">
+                💘 MRS TAYIBA MALIK 💘 💖✨<br>
+                <span style="font-size: 0.9rem; color: #666;">- Tumhara Apna Banda ❤️</span>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function checkPin() {
+            const pin = document.getElementById('pinCode').value;
+            // PIN is set to 3076
+            if (pin === "3076") {
+                document.getElementById('lock-screen').style.display = 'none';
+                document.getElementById('main-content').style.display = 'block';
+            } else {
+                document.getElementById('errorMsg').style.display = 'block';
+            }
+        }
+    </script>
+
+</body>
+</html>
