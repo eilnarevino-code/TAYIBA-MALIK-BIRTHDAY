@@ -3,10 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Happy Birthday MRS TAYIBA MALIK 💖</title>
+    <title>Happy Birthday MRS TAYIBA MALIK</title>
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Courier+Prime:wght@700&display=swap');
+
         body {
-            background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 99%, #fad0c4 100%);
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             margin: 0;
             padding: 20px;
@@ -15,57 +17,364 @@
             align-items: center;
             min-height: 100vh;
             color: #4a4a4a;
+            overflow-x: hidden; 
         }
+
+        /* BACKGROUND VIDEO */
+        #bg-video {
+            position: fixed;
+            right: 0;
+            bottom: 0;
+            min-width: 100%;
+            min-height: 100%;
+            width: auto;
+            height: auto;
+            z-index: -100;
+            object-fit: cover;
+            opacity: 0.5;
+            display: none;
+        }
+
+        .video-active #bg-video { display: block; }
+
+        /* FLOATING HEARTS BACKGROUND */
+        .hearts-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -50;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .heart-shape {
+            position: absolute;
+            bottom: -20px;
+            background-color: rgba(255, 71, 126, 0.4);
+            width: 20px;
+            height: 20px;
+            transform: rotate(-45deg);
+            animation: floatUp 8s infinite linear;
+        }
+
+        .heart-shape::before, .heart-shape::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background-color: rgba(255, 71, 126, 0.4);
+            border-radius: 50%;
+        }
+
+        .heart-shape::before { top: -10px; left: 0; }
+        .heart-shape::after { top: 0; right: -10px; }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(-45deg) scale(0.8); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateY(-100vh) rotate(-45deg) scale(1.5); opacity: 0; }
+        }
+
+        /* MAIN CONTAINER */
         .container {
-            background: rgba(255, 255, 255, 0.96);
+            background: rgba(255, 255, 255, 0.88);
             padding: 35px 25px;
-            border-radius: 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.15);
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(255, 71, 126, 0.3);
             max-width: 600px;
             width: 100%;
             text-align: center;
-            backdrop-filter: blur(10px);
-            border: 2px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(255, 255, 255, 0.9);
+            position: relative;
+            z-index: 10;
         }
-        #lock-screen {
-            display: block;
+        
+        /* SCREEN HIDING LOGIC */
+        #intro-screen { display: block; }
+        #lock-screen { display: none; }
+        #main-content { display: none; }
+
+        /* INTRO SCREEN STYLING */
+        .intro-images {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
         }
-        #main-content {
-            display: none;
+
+        .intro-img {
+            width: 100px;
+            height: auto;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(255, 71, 126, 0.2);
+            border: 3px solid #ff477e;
+            animation: float-up-down 2.5s ease-in-out infinite;
         }
-        .pin-input {
-            font-size: 1.5rem;
-            padding: 10px;
-            width: 180px;
-            text-align: center;
-            border: 2px solid #ff477e;
-            border-radius: 12px;
-            margin: 15px 0;
-            outline: none;
-            letter-spacing: 5px;
+
+        .intro-title {
+            color: #d81159;
+            font-size: 1.6rem;
+            margin-bottom: 10px;
+            font-weight: bold;
         }
-        .btn {
-            background: #ff477e;
+
+        .intro-text {
+            color: #666;
+            font-size: 1rem;
+            margin-bottom: 25px;
+        }
+
+        .btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+
+        .btn-yes {
+            background: linear-gradient(135deg, #ff477e, #d81159);
             color: white;
             border: none;
-            padding: 10px 25px;
+            padding: 12px 25px;
             font-size: 1rem;
-            border-radius: 15px;
+            border-radius: 20px;
             cursor: pointer;
             font-weight: bold;
+            box-shadow: 0 5px 15px rgba(216, 17, 89, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn-no {
+            background: #e0e0e0;
+            color: #666;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .btn-yes:hover { transform: scale(1.05); }
+        .btn-no:hover { transform: scale(0.95); }
+
+        .no-message {
+            color: #d81159;
+            margin-top: 15px;
+            font-weight: bold;
+            display: none;
+            animation: pulse 1s infinite alternate;
+        }
+
+        /* CUSTOM PINPAD DESIGN */
+        .custom-pinpad-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 15px;
+            background: #800000; 
+            padding: 25px 15px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+            position: relative;
+        }
+
+        .teddy-bear {
+            position: absolute;
+            bottom: -15px;
+            left: -10px;
+            font-size: 3rem;
+            transform: rotate(-10deg);
+            animation: float-up-down 3s infinite;
+            z-index: 5;
+        }
+
+        .lock-cats {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            z-index: 2;
+        }
+
+        .lock-cats img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 3px solid white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            animation: float-up-down 2.5s infinite alternate;
+        }
+
+        .lock-cats img:nth-child(2) {
+            animation-delay: 0.5s;
+        }
+
+        .polaroid-frame {
+            background: white;
+            padding: 8px 8px 20px 8px;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            transform: rotate(-5deg);
+            position: relative;
+            z-index: 2;
+            width: 100px;
+            height: 120px;
+        }
+
+        .polaroid-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 2px;
+        }
+
+        .bow {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            font-size: 1.8rem;
+            z-index: 3;
+            transform: rotate(15deg);
+        }
+
+        .pinpad-right {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 2;
+        }
+
+        .pinpad-title {
+            color: white;
+            font-family: 'Courier Prime', monospace;
+            font-size: 0.8rem;
+            margin-bottom: 5px;
+            letter-spacing: 1px;
+        }
+
+        .pin-dots {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 15px;
+        }
+
+        .dot {
+            width: 12px;
+            height: 12px;
+            border: 2px solid white;
+            border-radius: 3px;
+            background: transparent;
             transition: 0.2s;
         }
-        .btn:hover {
-            background: #d81159;
+
+        .dot.filled {
+            background: white;
         }
-        .error-msg {
+
+        .pinpad-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 8px;
+        }
+
+        .pin-btn {
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            border: none;
+            background: white;
             color: #d81159;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            display: none;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 3px 5px rgba(0,0,0,0.2);
+            transition: 0.1s;
         }
-        .heart {
-            font-size: 3.2rem;
+
+        .pin-btn:active {
+            transform: scale(0.9);
+            background: #ffebeb;
+        }
+
+        .pin-btn-clear {
+            background: #ff477e;
+            color: white;
+            font-size: 1rem;
+        }
+
+        .pinpad-hint {
+            color: #ffcccc;
+            font-size: 0.8rem;
+            margin-top: 15px;
+            font-family: 'Courier Prime', monospace;
+            letter-spacing: 1px;
+        }
+
+        .pin-error {
+            color: #ffcccc;
+            font-size: 0.8rem;
+            margin-top: 5px;
+            display: none;
+            font-weight: bold;
+            animation: pulse 0.5s infinite alternate;
+        }
+
+        /* FUNNY LINE */
+        .friends-joke {
+            font-size: 0.9rem;
+            color: #d81159;
+            font-weight: bold;
+            margin-top: 20px;
+            background: rgba(255, 240, 243, 0.8);
+            padding: 10px;
+            border-radius: 10px;
+            border: 1px dashed #ff477e;
+            animation: pulse 2s infinite alternate;
+        }
+
+        /* MAIN CONTENT */
+        .flowers-image {
+            width: 140px; 
+            height: auto;
+            margin: 10px auto 20px auto;
+            display: block;
+            animation: cute-swing 3s ease-in-out infinite;
+            transform-origin: center bottom;
+            filter: drop-shadow(0px 10px 15px rgba(0,0,0,0.1));
+        }
+
+        @keyframes cute-swing {
+            0% { transform: translateY(0px) rotate(0deg); }
+            25% { transform: translateY(-8px) rotate(-3deg); }
+            50% { transform: translateY(-15px) rotate(0deg); }
+            75% { transform: translateY(-8px) rotate(3deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+        
+        .typing-name {
+            color: #d81159;
+            font-size: 1.9rem;
+            margin-bottom: 5px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            overflow: hidden; 
+            border-right: .15em solid #d81159; 
+            white-space: nowrap; 
+            margin: 0 auto; 
+            animation: typing 3s steps(30, end), blink-caret .75s step-end infinite;
+        }
+
+        @keyframes typing { from { width: 0 } to { width: 100% } }
+        @keyframes blink-caret { from, to { border-color: transparent } 50% { border-color: #d81159; } }
+
+        .heart-icon {
+            font-size: 3rem;
             animation: pulse 1.2s infinite alternate;
             margin-bottom: 5px;
         }
@@ -73,23 +382,19 @@
             0% { transform: scale(1); }
             100% { transform: scale(1.15); }
         }
-        h1 {
-            color: #d81159;
-            font-size: 1.8rem;
-            margin-bottom: 5px;
-            text-transform: uppercase;
-        }
+        
         .date-badge {
-            background: #ff3366;
+            background: linear-gradient(135deg, #ff3366, #ff758c);
             color: white;
             display: inline-block;
-            padding: 5px 15px;
-            border-radius: 20px;
-            font-size: 0.9rem;
-            margin-bottom: 20px;
+            padding: 6px 18px;
+            border-radius: 25px;
+            font-size: 0.95rem;
+            margin-bottom: 15px;
             font-weight: bold;
+            box-shadow: 0 4px 10px rgba(255, 51, 102, 0.3);
         }
-        /* Photo Gallery Styling */
+        
         .photo-gallery {
             display: flex;
             justify-content: center;
@@ -100,158 +405,263 @@
             width: 120px;
             height: 120px;
             object-fit: cover;
-            border-radius: 15px;
-            border: 3px solid #ff477e;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 20px;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+            animation: wobble 4s ease-in-out infinite;
         }
-        /* Inline Memory Photo Styling */
-        .inline-memory {
-            text-align: center;
-            margin: 20px 0;
+        
+        @keyframes wobble {
+            0% { transform: rotate(0deg); }
+            25% { transform: rotate(2deg); }
+            50% { transform: rotate(0deg); }
+            75% { transform: rotate(-2deg); }
+            100% { transform: rotate(0deg); }
         }
+
+        .inline-memory { text-align: center; margin: 25px 0; }
         .inline-memory img {
             max-width: 100%;
             height: auto;
             max-height: 280px;
-            border-radius: 15px;
-            border: 3px solid #b5179e;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.15);
+            border-radius: 20px;
+            border: 4px solid #fff;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.15);
         }
         .memory-caption {
             font-size: 0.9rem;
             color: #b5179e;
             font-style: italic;
-            margin-top: 5px;
+            margin-top: 8px;
             font-weight: bold;
         }
         .message-scroll {
             text-align: left;
-            background: #fff0f3;
-            padding: 22px;
-            border-radius: 15px;
-            margin-top: 10px;
-            border-left: 5px solid #ff3366;
+            background: rgba(255, 240, 243, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            margin-top: 15px;
+            border: 1px solid rgba(255, 51, 102, 0.2);
             max-height: 420px;
             overflow-y: auto;
         }
+        
+        .message-scroll::-webkit-scrollbar { width: 6px; }
+        .message-scroll::-webkit-scrollbar-thumb { background: #ff477e; border-radius: 10px; }
+
         p {
-            font-size: 1rem;
-            line-height: 1.7;
+            font-size: 1.05rem;
+            line-height: 1.8;
             color: #444;
-            margin-bottom: 15px;
-        }
-        .shayari {
-            font-style: italic;
-            color: #b5179e;
-            font-weight: 500;
-            text-align: center;
-            margin: 15px 0;
-            background: rgba(255, 255, 255, 0.8);
-            padding: 10px;
-            border-radius: 8px;
+            margin-bottom: 20px;
+            font-family: 'Georgia', serif;
         }
         .highlight {
             font-weight: bold;
             color: #d81159;
             text-align: center;
             display: block;
-            font-size: 1.1rem;
-            margin: 15px 0;
+            font-size: 1.2rem;
+            margin: 20px 0;
+            letter-spacing: 0.5px;
+            animation: pulse 2s infinite alternate;
         }
         .signature {
             text-align: center;
             font-weight: bold;
             color: #ff3366;
-            font-size: 1.2rem;
-            margin-top: 20px;
+            font-size: 1.3rem;
+            margin-top: 30px;
         }
     </style>
 </head>
 <body>
 
+    <div class="hearts-bg" id="hearts-container"></div>
+
+    <video autoplay loop muted playsinline id="bg-video">
+        <source src="video.mp4" type="video/mp4">
+    </video>
+
     <div class="container">
-        <!-- LOCK SCREEN -->
-        <div id="lock-screen">
-            <div style="font-size: 3rem;">🔐</div>
-            <h2>A Special Surprise For You</h2>
-            <p style="color: #666; font-size: 0.95rem;">Enter your special birthday PIN (PIN: 3076)</p>
-            <input type="password" id="pinCode" class="pin-input" maxlength="4" placeholder="••••">
-            <br>
-            <button class="btn" onclick="checkPin()">Open Surprise</button>
-            <div id="errorMsg" class="error-msg">Incorrect PIN! Try 3076 🥺</div>
+        
+        <!-- 1. INTRO SCREEN -->
+        <div id="intro-screen">
+            <div class="intro-images">
+                <img src="cat.jpg" alt="Cute Cat 1" class="intro-img">
+                <img src="catti.jpg" alt="Cute Cat 2" class="intro-img" style="animation-delay: 0.5s;">
+            </div>
+            <h2 class="intro-title">Hey Beautiful</h2>
+            <p class="intro-text">Do you want to see your gift?</p>
+            
+            <div class="btn-group">
+                <button class="btn-yes" onclick="showPinScreen()">Yes, Please!</button>
+                <button class="btn-no" onclick="showNoMessage()">No, Thanks</button>
+            </div>
+            <p id="noMessage" class="no-message">Wrong answer! Try again 😉</p>
         </div>
 
-        <!-- MAIN BIRTHDAY CONTENT -->
-        <div id="main-content">
-            <div class="heart">✨👑</div>
-            <h1>MRS TAYIBA MALIK 💋🤭</h1>
-            <div class="date-badge">🎂 Special Day: 29th October 💖</div>
+        <!-- 2. CUSTOM PINPAD SCREEN -->
+        <div id="lock-screen">
+            
+            <div class="custom-pinpad-container">
+                <div class="teddy-bear">🧸</div>
+                
+                <!-- Dono Cute Cats -->
+                <div class="lock-cats">
+                    <img src="catti.jpg" alt="Cute Cat Catti">
+                    <img src="catti2.jpg" alt="Cute Cat Catti 2">
+                </div>
+                
+                <!-- YAHAN BANDI KI TASVEER LAGEGI (princess.jpg) -->
+                <div class="polaroid-frame">
+                    <div class="bow">🎀</div>
+                    <img src="princess.jpg" alt="My Princess">
+                </div>
 
-            <!-- TOP PHOTOS SECTION -->
+                <div class="pinpad-right">
+                    <div class="pinpad-title">Enter passcode</div>
+                    
+                    <div class="pin-dots">
+                        <div class="dot" id="dot1"></div>
+                        <div class="dot" id="dot2"></div>
+                        <div class="dot" id="dot3"></div>
+                        <div class="dot" id="dot4"></div>
+                    </div>
+
+                    <div class="pinpad-grid">
+                        <button class="pin-btn" onclick="enterPin('1')">1</button>
+                        <button class="pin-btn" onclick="enterPin('2')">2</button>
+                        <button class="pin-btn" onclick="enterPin('3')">3</button>
+                        <button class="pin-btn" onclick="enterPin('4')">4</button>
+                        <button class="pin-btn" onclick="enterPin('5')">5</button>
+                        <button class="pin-btn" onclick="enterPin('6')">6</button>
+                        <button class="pin-btn" onclick="enterPin('7')">7</button>
+                        <button class="pin-btn" onclick="enterPin('8')">8</button>
+                        <button class="pin-btn" onclick="enterPin('9')">9</button>
+                        <button class="pin-btn pin-btn-clear" onclick="clearPin()">✖</button>
+                        <button class="pin-btn" onclick="enterPin('0')">0</button>
+                        <button class="pin-btn" onclick="enterPin('*')">*</button>
+                    </div>
+
+                    <!-- HINT: OUR SPECIAL DAY -->
+                    <div class="pinpad-hint">hint: our special day</div>
+                    <div id="errorMsg" class="pin-error">Incorrect code!</div>
+                </div>
+            </div>
+
+            <div class="friends-joke">
+                ⚠️ Warning: This surprise is exclusively for my special person. Everyone else, hush now and look away!
+            </div>
+        </div>
+
+        <!-- 3. MAIN BIRTHDAY CONTENT -->
+        <div id="main-content">
+            <div class="heart-icon">👑</div>
+            <h1 class="typing-name">MRS TAYIBA MALIK</h1>
+            <div class="date-badge">A Special Day for a Special Girl</div>
+
+            <img src="pookie.jpg" alt="Flowers for you" class="flowers-image">
+
             <div class="photo-gallery">
                 <img src="photo1.jpg" alt="Tayiba Malik">
                 <img src="photo2.jpg" alt="Memories">
             </div>
 
             <div class="message-scroll">
-                <p><strong>Happy Birthday to the girl who holds my heart, my safe place, my peace, and my entire world 💍✨🎂</strong></p>
+                <p><strong>Happy Birthday to the girl who holds my heart, my safe place, my peace, and my entire world.</strong></p>
 
                 <p>Meri jaan jab main piche mur kar dekhta hoon ke humne kitna waqt aik sath guzara hai aur aaj hum kis haseen jagah par hain toh mera dil sirf shukar se bhar jata hai. Tum sirf meri partner nahi ho, tum meri woh taaqat ho jo mujhe har mushkil waqt mein sambhal leti ho. Mera har din tumse shuru hota hai aur tum par hi khatam hota hai.</p>
 
-                <p>Main janta hoon ke kabhi kabhi meri overthinking aur insecurities ki wajah se tumhe thori pareshani hoti hai, lekin tumne phir bhi kabhi mera haath nahi chora. Tumne har kadam par mujhe samjha hai, mujhe reassure kiya hai aur yeh prove kiya hai ke tum sirf aur sirf meri ho. Subah uthte hi apne din ki pehli khushi mere sath share karna, meri baatein sunna aur har haal mein mera sath dena—yeh sab mere liye dunya ki sabse keemti cheez hai.</p>
-
-                <!-- INLINE VIDEO CALL SLEEPING PHOTO -->
                 <div class="inline-memory">
                     <img src="photo3.jpg" alt="Sleeping on Video Call">
-                    <div class="memory-caption">Jab tum video call par so gayi thi... sabse pyaari memory 🥺💤💕</div>
+                    <div class="memory-caption">Jab tum video call par so gayi thi, sabse pyaari memory.</div>
                 </div>
 
-                <p>You are my whole universe, my life, my precious dudu, and my absolute jaan 💖✨ Tum sirf meri mohabbat nahi balkay Malik ki jaan ho 💓💞 We share this beautiful dream of marrying each other and becoming a pilot, and I want you to know that I will never, ever leave you. ✈️💍</p>
-
-                <div class="shayari">
-                    تم سے محبت ka کوئی حساب تھوڑی ہے 🧸<br>
-                    تم سے دل لگایا ہے کوئی خواب تھوڑی ہے 🩹✨
-                </div>
-
-                <p>I know my temper can sometimes be sharp and it might hurt you unintentionally, but please believe me when I say I love you beyond words. You are the one who rules my heart, my little bacha 💋😚</p>
+                <p>You are my whole universe, my life, my precious dudu, and my absolute jaan. Tum sirf meri mohabbat nahi balkay Malik ki jaan ho. We share this beautiful dream of marrying each other and becoming a pilot, and I want you to know that I will never ever leave you.</p>
                 
-                <span class="highlight">👑 MRS TAYIBA MALIK 👑 🥹🫂</span>
+                <span class="highlight">You are my everything, my beautiful wife.</span>
 
-                <div class="shayari">
-                    تم جو اتنے قریب ہو کوئی مذاق تھوڑی ہے 🔐💍<br>
-                    تم سے ملنا صرف اتفاق تھوڑی ہے 🦋✨
-                </div>
-
-                <p>I want to build my entire future with you 🤭♾️ Har lamha tumhare sath bitana chahta hoon kyun ke tum Malik ki wifey ho 🌸 Tum hi wo wahid shakhs ho jis se mujhe be-panah mohabbat hai.</p>
-
-                <p>Dua hai ke Allah tallah tumhari zindagi ki har ek khwahish ko poora kare. Tumhari yeh pyari si muskaan kabhi tumhare chehre se na hatay aur tumhari zindagi mein kabhi koi dukh na aaye. Main hamesha tumhare sath hoon tumhara har darr door karne ke liye aur tumhein dunya ki har khushi dene ke liye. Tum hi Malik ke bachon ki maa bano gi! 💍</p>
-
-                <span class="highlight">💍 MRS TAYIBA MALIK 💍 💗♥️</span>
-
-                <div class="shayari">
-                    اور ہاں تم صرف میری aaj ki محبت نہیں ❤️😍<br>
-                    بلکہ میری आने والی پوری zindagi ka حاصل ho 💘
-                </div>
-
-                <p>Tum meri zindagi ka woh haseen tohfa ho jo mujhe rab ne diya hai. Aaj ke is special din par main bas yeh kehna chahta hoon ke tum mere liye kya ho—tum meri subah ka sukoon aur meri rooh ka sakoon ho. Hamesha aise hi muskuraati raho, khush raho aur meri zindagi ko yunhi roshan rakho. I love you so so much meri jaan, Happy Birthday to my forever! 🌍❤️🧿</p>
+                <p>Dua hai ke Allah tallah tumhari zindagi ki har ek khwahish ko poora kare. Hamesha aise hi muskuraati raho, khush raho aur meri zindagi ko yunhi roshan rakho. I love you so so much meri jaan, Happy Birthday to my forever.</p>
             </div>
 
             <div class="signature">
-                💘 MRS TAYIBA MALIK 💘 💖✨<br>
-                <span style="font-size: 0.9rem; color: #666;">- Tumhara Apna Banda ❤️</span>
+                Your Forever,<br>
+                <span style="font-size: 1rem; color: #666; font-weight: normal; font-style: italic;">Tumhara Apna Banda</span>
             </div>
         </div>
     </div>
 
     <script>
+        // HEARTS GENERATOR
+        const heartsContainer = document.getElementById('hearts-container');
+        function createHearts() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart-shape');
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 5 + 's'; 
+            heart.style.width = Math.random() * 15 + 10 + 'px';
+            heart.style.height = heart.style.width;
+            heartsContainer.appendChild(heart);
+            setTimeout(() => { heart.remove(); }, 8000);
+        }
+        setInterval(createHearts, 400);
+
+        // SCREEN NAVIGATION
+        function showPinScreen() {
+            document.getElementById('intro-screen').style.display = 'none';
+            document.getElementById('lock-screen').style.display = 'block';
+        }
+
+        function showNoMessage() {
+            document.getElementById('noMessage').style.display = 'block';
+            setTimeout(() => { document.getElementById('noMessage').style.display = 'none'; }, 2000);
+        }
+
+        // CUSTOM PINPAD LOGIC
+        let currentPin = "";
+        // YAHAN APNI SPECIAL DATE (PIN) LIKHEIN (Misaal: 2905)
+        const correctPin = "3076"; 
+
+        function enterPin(num) {
+            if (currentPin.length < 4) {
+                currentPin += num;
+                updateDots();
+                if (currentPin.length === 4) {
+                    setTimeout(checkPin, 300); 
+                }
+            }
+        }
+
+        function clearPin() {
+            currentPin = currentPin.slice(0, -1);
+            updateDots();
+            document.getElementById('errorMsg').style.display = 'none';
+        }
+
+        function updateDots() {
+            for (let i = 1; i <= 4; i++) {
+                const dot = document.getElementById('dot' + i);
+                if (i <= currentPin.length) {
+                    dot.classList.add('filled');
+                } else {
+                    dot.classList.remove('filled');
+                }
+            }
+        }
+
         function checkPin() {
-            const pin = document.getElementById('pinCode').value;
-            // PIN is set to 3076
-            if (pin === "3076") {
+            if (currentPin === correctPin) {
                 document.getElementById('lock-screen').style.display = 'none';
                 document.getElementById('main-content').style.display = 'block';
+                document.body.classList.add('video-active');
             } else {
                 document.getElementById('errorMsg').style.display = 'block';
+                currentPin = ""; 
+                setTimeout(() => {
+                    updateDots();
+                    document.getElementById('errorMsg').style.display = 'none';
+                }, 1000);
             }
         }
     </script>
