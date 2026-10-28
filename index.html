@@ -98,21 +98,14 @@
         #main-content { display: none; }
 
         /* INTRO SCREEN STYLING */
-        .intro-images {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .intro-img {
-            width: 100px;
+        .intro-image {
+            width: 120px;
             height: auto;
             border-radius: 20px;
             box-shadow: 0 8px 20px rgba(255, 71, 126, 0.2);
             border: 3px solid #ff477e;
             animation: float-up-down 2.5s ease-in-out infinite;
+            margin-bottom: 20px;
         }
 
         .intro-title {
@@ -477,7 +470,6 @@
 </head>
 <body>
 
-    <!-- BACKGROUND MUSIC (Yahan music.mp3 add kiya hai) -->
     <audio id="bg-music" loop>
         <source src="music.mp3" type="audio/mpeg">
     </audio>
@@ -490,17 +482,15 @@
 
     <div class="container">
         
-        <!-- 1. INTRO SCREEN -->
+        <!-- 1. INTRO SCREEN (Sahi kiya gaya) -->
         <div id="intro-screen">
-            <div class="intro-images">
-                <img src="cat.png" alt="Cute Cat 1" class="intro-img">
-                <img src="catti.jpg" alt="Cute Cat 2" class="intro-img" style="animation-delay: 0.5s;">
-            </div>
+            <!-- Yahan sirf ek hi tasveer lagegi. Agar aapki cat file .png hai to src="cat.png" kar lein -->
+            <img src="cat.jpg" alt="Cute Cat" class="intro-image">
+            
             <h2 class="intro-title">Hey Beautiful</h2>
             <p class="intro-text">Do you want to see your gift?</p>
             
             <div class="btn-group">
-                <!-- Yahan click par music start hone ka function laga hai -->
                 <button class="btn-yes" onclick="startExperience()">Yes, Please!</button>
                 <button class="btn-no" onclick="showNoMessage()">No, Thanks</button>
             </div>
@@ -614,9 +604,9 @@
         function startExperience() {
             // Music play karein
             const music = document.getElementById('bg-music');
-            music.volume = 0.5; // Awaaz ka level (0.0 se 1.0 tak)
+            music.volume = 0.5; 
             music.play().catch(function(error) {
-                console.log("Music autoplay blocked, but user clicked so it should work.");
+                console.log("Browser ne music block kiya, lekin click ke baad chalna chahiye.");
             });
 
             // Screen change karein
